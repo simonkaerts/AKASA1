@@ -1,5 +1,5 @@
 document.getElementById("bookingForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevent default form submission
     
     const formData = {
         name: document.getElementById("name").value,
@@ -8,34 +8,15 @@ document.getElementById("bookingForm").addEventListener("submit", function(event
         time: document.getElementById("time").value
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbyzqSI3-6mGjSGdO0AJE7K-tIpTsFcXe8UcM27uWnVzQHNk1_fYXrDj0TrKM4C5OKTO/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbwo46DhvOPJtdaZKUjn8HSYwDu6NMxU31y3vIoCym-J5ca5Q43Taqay3uSszuy8Rvk6/exec", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
-    }).then(() => {
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log("Server Response:", data); // Check the response in DevTools Console
         document.getElementById("confirmation").innerText = "Booking recorded!";
-    });
-});
-
-let deferredPrompt;
-
-window.addEventListener("beforeinstallprompt", (event) => {
-    event.preventDefault();
-    deferredPrompt = event;
-
-    // Show an "Install" button manually
-    const installButton = document.createElement("button");
-    installButton.innerText = "Install App";
-    installButton.style.display = "block";
-    installButton.addEventListener("click", () => {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choice) => {
-            if (choice.outcome === "accepted") {
-                console.log("User installed the app");
-            }
-            deferredPrompt = null;
-        });
-    });
-
-    document.body.appendChild(installButton);
+    })
+    .catch(error => console.error("Error:", error));
 });
