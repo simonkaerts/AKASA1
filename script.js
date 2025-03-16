@@ -8,7 +8,7 @@ document.getElementById("bookingForm").addEventListener("submit", function(event
         time: document.getElementById("time").value
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbwo46DhvOPJtdaZKUjn8HSYwDu6NMxU31y3vIoCym-J5ca5Q43Taqay3uSszuy8Rvk6/exec", {
+    fetch("hhttps://script.google.com/macros/s/AKfycbxq2My3duJZxXq8dagfVIA9pDjPCJ75BoN1qefHcDKPBF0oHnEbD5OgQEKRpj2KJf-D/exec", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
